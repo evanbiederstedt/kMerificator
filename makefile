@@ -40,7 +40,7 @@ OBJS = \
 #
 EXECS = kMerificator
 
-OUT_DIR = ../obj ../bin
+OUT_DIR = ${DIR_OBJ} ${DIR_BIN}
 
 directories: ${OUT_DIR}
 
