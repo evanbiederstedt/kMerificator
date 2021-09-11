@@ -302,7 +302,7 @@ std::pair<double, unsigned int> Utilities::findVectorMaxP_nonCritical(std::vecto
 	return std::pair<double, unsigned int>(max, selectedI);
 }
 
-vector<string> Utilities::ItoStr(vector<int> i)
+std::vector<string> Utilities::ItoStr(vector<int> i)
 {
 	vector<string> forReturn;
 	for(int I = 0; I < (int)i.size(); I++)
@@ -364,26 +364,26 @@ int Utilities::chooseFromVector(vector<double>& v)
 		if(i == (v.size() - 1))
 		{
 			selected_i = i;
-			cout << "WARNING!!\n";
-			cout << "selected_i: " << selected_i << "\n";
-			cout << "f: " << f << "\n";
-			cout << "running_sum: " << running_sum << "\n";
-			cout << "resolution: " << resolution << "\n";
-			cout << "problematic_items: " << problematic_items << "\n";
-			cout << "sum: " << sum << "\n";
+			std::cout << "WARNING!!\n";
+			std::cout << "selected_i: " << selected_i << "\n";
+			std::cout << "f: " << f << "\n";
+			std::cout << "running_sum: " << running_sum << "\n";
+			std::cout << "resolution: " << resolution << "\n";
+			std::cout << "problematic_items: " << problematic_items << "\n";
+			std::cout << "sum: " << sum << "\n";
 
 			double deb_running_sum = 0.00;
 			for(unsigned int k = 0; k < v.size(); k++)
 			{
 				double deb_proportion = v.at(k)/sum;
-				cout << "Vector v element " << k << "\n";
-				cout << "\tv.at(k): " << v.at(k) << "\n";
-				cout << "\tdeb_proportion: "<< deb_proportion << "\n";
-				cout << "\tdeb_running_sum before: "<< deb_running_sum << "\n";
+				std::cout << "Vector v element " << k << "\n";
+				std::cout << "\tv.at(k): " << v.at(k) << "\n";
+				std::cout << "\tdeb_proportion: "<< deb_proportion << "\n";
+				std::cout << "\tdeb_running_sum before: "<< deb_running_sum << "\n";
 
 				deb_running_sum += deb_proportion;
 
-				cout << "\tdeb_running_sum after: "<< deb_running_sum << "\n";
+				std::cout << "\tdeb_running_sum after: "<< deb_running_sum << "\n";
 
 
 			}
@@ -397,7 +397,7 @@ int Utilities::chooseFromVector(vector<double>& v)
 	return selected_i;
 }
 
-vector<string> Utilities::split(const string &s, char delim, vector<string> &elems)
+std::vector<string> Utilities::split(const string &s, char delim, vector<string> &elems)
 {
     std::stringstream ss(s);
     std::string item;
@@ -408,9 +408,9 @@ vector<string> Utilities::split(const string &s, char delim, vector<string> &ele
     return elems;
 }
 
-vector<string> Utilities::split(string input, string delimiter)
+std::vector<string> Utilities::split(string input, string delimiter)
 {
-	vector<string> output;
+	std::vector<string> output;
 	if(input.length() == 0)
 	{
 		return output;
@@ -448,12 +448,12 @@ vector<string> Utilities::split(string input, string delimiter)
 }
 
 
-vector<string> Utilities::split(const string &s, char delim) {
-    vector<string> elems;
+std::vector<string> Utilities::split(const string &s, char delim) {
+    std::vector<string> elems;
     return split(s, delim, elems);
 }
 
-string Utilities::ItoStr(int i)
+std::string Utilities::ItoStr(int i)
 {
 	std::stringstream sstm;
 	sstm << i;
@@ -461,7 +461,7 @@ string Utilities::ItoStr(int i)
 }
 
 
-string Utilities::PtoStr(void* p)
+std::string Utilities::PtoStr(void* p)
 {
 	std::stringstream sstm;
 	sstm << p;
@@ -469,19 +469,19 @@ string Utilities::PtoStr(void* p)
 }
 
 
-string Utilities::DtoStr(double d)
+std::string Utilities::DtoStr(double d)
 {
 	std::stringstream sstm;
 	sstm << d;
 	return sstm.str();
 }
 
-string Utilities::join(vector<string> parts, string delim)
+std::string Utilities::join(vector<string> parts, string delim)
 {
 	if(parts.size() == 0)
 		return "";
 
-	string ret = parts.at(0);
+	std::string ret = parts.at(0);
 
 	for(unsigned int i = 1; i < parts.size(); i++)
 	{
@@ -545,9 +545,9 @@ std::string Utilities::timestamp()
     return " [ "+ forReturn.substr(0, forReturn.length() - 1)+" ] ";
 }
 
-map<string, string> Utilities::readFASTA(std::string file, bool fullIdentifier)
+std::map<string, string> Utilities::readFASTA(std::string file, bool fullIdentifier)
 {
-	map<string, string> forReturn;
+	std::map<string, string> forReturn;
 
 	std::ifstream FASTAstream;
 

@@ -1,7 +1,7 @@
 # LIBRARY SETTINGS - SET AS NECESSARY
 
-INC_BOOST = /home/dilthey/PnP/libs/boost_1_52_0/
-LIB_BOOST = /home/dilthey/PnP/libs/boost_1_52_0/stage/lib/
+INC_BOOST = /usr/include/boost
+LIB_BOOST = /usr/lib/x86_64-linux-gnu/
 INCS = -I$(INC_BOOST) 
 LIBS = -L$(LIB_BOOST) -lboost_system -lboost_filesystem
 
@@ -16,8 +16,9 @@ MKDIR_P = mkdir -p
 # object and binary dirs
 #
 
-DIR_OBJ = ../obj
-DIR_BIN = ../bin
+DIR_OBJ = /root/kMerificator/obj
+DIR_BIN = /root/kMerificator/bin
+
 
 CXX    = g++
 COPTS  = -ggdb -O2 -fopenmp -std=gnu++0x -fstack-protector-all

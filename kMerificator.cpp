@@ -3,7 +3,7 @@
 // Author      : 
 // Version     :
 // Copyright   : 
-// Description : Hello World in C++, Ansi-style
+// Description : 
 //============================================================================
 
 #include <iostream>
@@ -19,7 +19,7 @@ void errEx(std::string message);
 
 int main(int argc, char *argv[]) {
 
-	vector<string> arguments (argv + 1, argv + argc + !argc);
+	std::vector<string> arguments (argv + 1, argv + argc + !argc);
 
 	int cortex_height = 26;
 	int cortex_width = 140;
@@ -29,11 +29,11 @@ int main(int argc, char *argv[]) {
 	
 	bool onlyPASS = false;
 
-	string vcfFile;
-	string referenceGenome;
-	string deBruijnGraph;
-	string outputDirectory;
-	string regions;
+	std::string vcfFile;
+	std::string referenceGenome;
+	std::string deBruijnGraph;
+	std::string outputDirectory;
+	std::string regions;
 	
 	for(unsigned int i = 0; i < arguments.size(); i++)
 	{
@@ -143,6 +143,6 @@ int main(int argc, char *argv[]) {
 
 void errEx(std::string message)
 {
-	cerr << message << "\n" << flush;
+	std::cerr << message << "\n" << std::flush;
 	exit(1);
 }
