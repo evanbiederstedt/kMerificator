@@ -16,8 +16,8 @@ MKDIR_P = mkdir -p
 # object and binary dirs
 #
 
-DIR_OBJ = /root/kMerificator/obj
-DIR_BIN = /root/kMerificator/bin
+DIR_OBJ = /kMerificator/obj
+DIR_BIN = /kMerificator/bin
 
 
 CXX    = g++

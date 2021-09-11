@@ -16,3 +16,6 @@ RUN git clone https://github.com/evanbiederstedt/kMerificator.git && \
     cd kMerificator && \
     git checkout develop && \
     make all
+
+## executable in kMerificator/bin, './kMerificator'
+
