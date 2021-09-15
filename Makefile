@@ -1,7 +1,8 @@
 # LIBRARY SETTINGS - SET AS NECESSARY
 
-INC_BOOST = /usr/include/boost
-LIB_BOOST = /usr/lib/x86_64-linux-gnu/
+
+INC_BOOST = /usr/local/Cellar/boost/1.76.0/include
+LIB_BOOST = /usr/local/Cellar/boost/1.76.0/lib
 INCS = -I$(INC_BOOST) 
 LIBS = -L$(LIB_BOOST) -lboost_system -lboost_filesystem
 
@@ -16,14 +17,16 @@ MKDIR_P = mkdir -p
 # object and binary dirs
 #
 
-DIR_OBJ = /kMerificator/obj
-DIR_BIN = /kMerificator/bin
+DIR_OBJ = /Users/evanbiederstedt/kMerificator/obj
+DIR_BIN = /Users/evanbiederstedt/kMerificator/bin
 
-
+CPP = clang++ -std=c++11 -stdlib=libc++
+CPPFLAGS = -I/usr/local/opt/llvm/include -fopenmp
+LDFLAGS = -L/usr/local/opt/llvm/lib
 CXX    = g++
 COPTS  = -ggdb -O2 -fopenmp -std=gnu++0x -fstack-protector-all
-CFLAGS = 
-COMPILE = $(CXX) $(INCS) $(CFLAGS) $(COPTS)
+## CFLAGS = 
+COMPILE = $(CPP) $(COPTS) $(INCS) $(CPPFLAGS) $(LDFLAGS)
 
 VPATH = Data:Graph:NextGen:hash:hash/deBruijn:hash/sequence:GraphAligner:GraphAlignerUnique:readFilter
         
@@ -40,7 +43,7 @@ OBJS = \
 #
 EXECS = kMerificator
 
-OUT_DIR = ${DIR_OBJ} ${DIR_BIN}
+OUT_DIR = ../obj ../bin
 
 directories: ${OUT_DIR}
 
@@ -79,4 +82,3 @@ realclean: clean
 
 ${OUT_DIR}:
 	${MKDIR_P} ${OUT_DIR}
-
