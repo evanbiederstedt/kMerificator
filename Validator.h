@@ -384,6 +384,13 @@ void evaluate_dGS(diploidGenomeString& gS, diploidGenomeString& gS_unresolved, c
 	std::vector<int> inducedkMers_OK;
 	std::vector<int> inducedkMers_invalid;
 	std::vector<int> inducedkMers_inReference;
+	std::vector<std::string> ok_kmers; 
+	std::vector<std::string> invalid_kmers; 
+	//std::vector<std::string> reference_kmers; 
+
+	//std::vector<std::string> nothingHere;
+	//nothingHere.push_back("None");
+	//std::string nothingHere;
 
 	std::string filenameForSpatialSummary = pathForSpatialSummary + "/spatialSummary_" + nameForSummary + ".txt";
 	ofstream spatialSummaryStream;
@@ -399,7 +406,9 @@ void evaluate_dGS(diploidGenomeString& gS, diploidGenomeString& gS_unresolved, c
 			"InducedkMersInReference" << "\t" <<
 			"DiploidChromotype" << "\t" <<
 			"ChromotypeLostPhase" << "\t" <<
-			"GapsAtLevel" << "\n";
+			"GapsAtLevel" << "\t" <<
+			"kmers_ok" << "\t" <<
+			"kmers_invalid" << "\n";
 
 	auto partitionStringIntokMers_overGaps = [](std::string s, int kMerSize) -> std::vector<std::string> {
 		std::vector<std::string> forReturn;
@@ -497,19 +506,27 @@ void evaluate_dGS(diploidGenomeString& gS, diploidGenomeString& gS_unresolved, c
 
 				if(kMerOK)
 				{
-					if(kMer_counts.count(kMer) == 0)
+					if(kMer_counts.count(kMer) == 0){
 						kMer_counts[kMer] = 0;
+					}
 					kMer_counts[kMer]++;
 
 					if(graph->kMerinGraph(kMer))
 					{
 						inducedkMers_OK.at(i)++;
+						ok_kmers.push_back(kMer);
+					} 
+					else
+					{
+						ok_kmers.push_back(std::string(""));
 					}
+					invalid_kmers.push_back(std::string(""));
 				}
 				else
 				{
 					kMersCannotEvaluate++;
 					inducedkMers_invalid.at(i)++;
+					invalid_kmers.push_back(kMer);
 				}
 
 				if(kMers_reference.size() == 0)
@@ -521,6 +538,11 @@ void evaluate_dGS(diploidGenomeString& gS, diploidGenomeString& gS_unresolved, c
 					if(kMers_reference.count(kMer))
 					{
 						inducedkMers_inReference.at(i)++;
+						//reference_kmers.push_back(kMer);
+					}
+					else 
+					{
+						//reference_kmers.push_back(std::string(""));
 					}
 				}
 			}
@@ -531,6 +553,7 @@ void evaluate_dGS(diploidGenomeString& gS, diploidGenomeString& gS_unresolved, c
 	inducedkMers.resize(s1.length()-k+1,0);
 	inducedkMers_invalid.resize(s1.length()-k+1,0);
 	inducedkMers_OK.resize(s1.length()-k+1,0);
+	//ok_kmers.resize(s1.length()-k+1,0);
 	inducedkMers_inReference.resize(s1.length()-k+1,0);
 	assert(s1.length() == s2.length());
 	processString(s1);
@@ -547,7 +570,9 @@ void evaluate_dGS(diploidGenomeString& gS, diploidGenomeString& gS_unresolved, c
 				inducedkMers_inReference.at(level) << "\t" <<
 				uncompressed_chromotypes_diploid.at(level) << "\t" <<
 				uncompressed_chromotypes_losePhasing.at(level) << "\t" <<
-				uncompressed_chromotypes_nGaps.at(level) << "\n";
+				uncompressed_chromotypes_nGaps.at(level) << "\t" <<
+				ok_kmers.at(level) << ", " << ok_kmers.at(level + 1) << "\t" << 
+				invalid_kmers.at(level) << ", " << invalid_kmers.at(level + 1) << "\n";
 	}
 
 	spatialSummaryStream.close();
